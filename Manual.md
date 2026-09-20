@@ -1,5 +1,7 @@
 # Onfile user manual
 
+Find filenames across your drives. Then open the file, the folder, or a terminal.
+
 Onfile is a Windows tray app that finds files by name on local drives and on network shares you add. It keeps an index on your PC. 
 Local NTFS volumes can stay current automatically; network shares update when you scan.
 
