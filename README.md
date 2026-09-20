@@ -1,4 +1,5 @@
 # Onfile
+Find filenames across your drives. Then open the file, the folder, or a terminal.
 
 Onfile is a Windows tray app for finding files on local drives and network shares.
 
