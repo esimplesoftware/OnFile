@@ -1,1 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onfile — Find files across the drives and shares you add</title>
+  <meta name="description" content="Onfile is a free Windows app that indexes filenames and paths on the local disks and network shares you choose. Open the file, open the folder, copy the path, or open a command line in that folder.">
+  <meta name="theme-color" content="#1a1814">
+  <meta property="og:title" content="Onfile">
+  <meta property="og:description" content="Find a file by name across the drives and shares you add. Then open it, copy the path, or open a command line there.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="onfile-256.png" type="image/png">
+  <link rel="apple-touch-icon" href="onfile-256.png">
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --bg-2: #ebe4d6;
+      --ink: #1a1814;
+      --muted: #5c564c;
+      --line: #d4cbb8;
+      --card: #fffaf2;
+      --accent: #b45309;
+      --accent-ink: #7c2d12;
+      --ok: #3f6b4a;
+      --shadow: 0 12px 40px rgba(26, 24, 20, 0.08);
+      --mono: "Cascadia Mono", "SFMono-Regular", "Consolas", ui-monospace, monospace;
+      --sans: "Segoe UI", "Sora", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, #fde8c8 0%, transparent 55%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    a { color: var(--accent-ink); }
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      font-size: 1.15rem;
+    }
+
+    .mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .mark img {
+      width: 40px;
+      height: 40px;
+      display: block;
+      border-radius: 8px;
+    }
+
+    nav { display: flex; gap: 18px; align-items: center; font-size: 0.95rem; }
+    nav a { text-decoration: none; color: var(--muted); }
+    nav a:hover { color: var(--ink); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: #f8f1e5 !important;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      border: 1px solid var(--ink);
+    }
+    .btn:hover { background: #2c2822; color: #fff !important; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink) !important;
+      border-color: var(--line);
+    }
+    .btn-ghost:hover { background: var(--bg-2); color: var(--ink) !important; }
+    .btn-lg { padding: 13px 20px; font-size: 1.02rem; }
+
+    .hero { padding: 48px 0 28px; }
+    .kicker {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.35rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin: 0 0 16px;
+      max-width: 16ch;
+    }
+    .lede {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 42rem;
+      margin: 0 0 28px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .fine {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 14px 0 0;
+    }
+
+    .shot {
+      margin: 40px 0 0;
+      background: #1e1c18;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #2a2722;
+    }
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    section { padding: 28px 0; }
+    h2 {
+      font-size: 1.45rem;
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+    }
+    .section-lead { color: var(--muted); margin: 0 0 22px; max-width: 40rem; }
+
+    .grid3, .grid2 {
+      display: grid;
+      gap: 14px;
+    }
+    .grid3 { grid-template-columns: repeat(3, 1fr); }
+    .grid2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.02rem; letter-spacing: -0.02em; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent-ink);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .actions li {
+      list-style: none;
+    }
+    ul.actions {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+    }
+    ul.actions li {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    ul.actions small {
+      display: block;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .yes { border-top: 3px solid var(--ok); }
+    .no { border-top: 3px solid #9a3412; }
+    .split ul { margin: 10px 0 0; padding-left: 1.1rem; color: var(--muted); }
+    .split li { margin: 6px 0; }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin: 0 0 10px;
+    }
+    summary { cursor: pointer; font-weight: 650; }
+    details p { margin: 10px 0 4px; color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 48px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 800px) {
+      .grid3, .grid2, .split, ul.actions { grid-template-columns: 1fr; }
+      nav .hide-sm { display: none; }
+      h1 { max-width: none; }
+      .shot { margin-top: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#top">
+        <span class="mark" aria-hidden="true">
+          <img src="onfile-256.png" alt="" width="40" height="40">
+        </span>
+        Onfile
+      </a>
+      <nav>
+        <a class="hide-sm" href="#how">How it works</a>
+        <a class="hide-sm" href="#limits">Limits</a>
+        <a class="hide-sm" href="#faq">FAQ</a>
+        <a class="btn" href="DOWNLOAD_URL">Download</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="kicker">Free Windows app</p>
+        <h1>Find filenames across your drives and shares. Then open the file, open the folder, or open the folder in a terminal.</h1>
+        <p class="lede">
+          Onfile indexes names and paths on the local disks and network shares you choose.
+          Open the file, open the folder, copy the path or name, or open a command line in that folder—without waiting on Explorer.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-lg" href="DOWNLOAD_URL">Download Onfile for Windows</a>
+          <a class="btn btn-ghost btn-lg" href="RELEASES_URL">GitHub Releases</a>
+        </div>
+        <p class="fine">Free. Name and path search only. You add each drive or share.</p>
+
+        <figure class="shot">
+          <img
+            src="onfile.png"
+            alt="Onfile showing filename search results across local drives and a network share"
+            width="1600"
+            height="900">
+        </figure>
+      </section>
+
+      <section id="how">
+        <h2>How it works</h2>
+        <p class="section-lead">You control the index. Onfile does not pretend every location behaves like C:.</p>
+        <div class="grid3">
+          <article class="card">
+            <span class="num">01</span>
+            <h3>You pick the locations</h3>
+            <p>Add NTFS volumes and network shares. Nothing else is in the index.</p>
+          </article>
+          <article class="card">
+            <span class="num">02</span>
+            <h3>Local stays fresh. Shares wait for you.</h3>
+            <p>Local NTFS can follow the change journal. A share is scanned when you ask—not while you are trying to use the PC.</p>
+          </article>
+          <article class="card">
+            <span class="num">03</span>
+            <h3>The result is the action</h3>
+            <p>Find the file, then open it, open the folder, copy the path or name, or open a command line in that folder.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>From a result</h2>
+        <p class="section-lead">Search is the means. These are the jobs after you find the file.</p>
+        <ul class="actions">
+          <li>Open file<small>the document itself</small></li>
+          <li>Open folder<small>skip the tree walk</small></li>
+          <li>Copy path<small>for tickets and scripts</small></li>
+          <li>Copy name<small>just the filename</small></li>
+          <li>Command line<small>in that folder</small></li>
+        </ul>
+      </section>
+
+      <section id="limits">
+        <h2>What it does and does not do</h2>
+        <p class="section-lead">1.0 is name and path search on locations you add. That is the whole product.</p>
+        <div class="split">
+          <article class="card yes">
+            <h3>Does</h3>
+            <ul>
+              <li>Index filenames and paths on drives and shares you add</li>
+              <li>Keep local NTFS current from the change journal</li>
+              <li>Scan network shares when you ask</li>
+              <li>Open file, folder, copy path or name, open a command line in that folder</li>
+            </ul>
+          </article>
+          <article class="card no">
+            <h3>Does not</h3>
+            <ul>
+              <li>Search inside file contents</li>
+              <li>Pretend a NAS scan is as instant as local NTFS</li>
+              <li>Index locations you never added</li>
+              <li>Upload your file list (search stays on your PC)</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2>Questions</h2>
+        <p class="section-lead">Short answers. The limits are intentional.</p>
+
+        <details open>
+          <summary>Is this Everything?</summary>
+          <p>Everything is excellent for local NTFS names. Onfile is built around locations you add, including shares you scan on demand, and actions on the result.</p>
+        </details>
+        <details>
+          <summary>Will my NAS be instant?</summary>
+          <p>After a scan, you search the index. The scan itself depends on the share. You start that scan; Onfile does not pretend a network folder is a local MFT.</p>
+        </details>
+        <details>
+          <summary>Does it search inside PDFs or documents?</summary>
+          <p>No. Names and paths only.</p>
+        </details>
+        <details>
+          <summary>What does a command line mean here?</summary>
+          <p>Onfile opens a command line in the folder that contains the file. Which terminal host you get may change in a later version; 1.0 is “a command line in that folder.”</p>
+        </details>
+        <details>
+          <summary>Is it free?</summary>
+          <p>Yes. Onfile is a free Windows app.</p>
+        </details>
+      </section>
+
+      <section>
+        <h2>Get it</h2>
+        <p class="section-lead">Download the installer from the latest GitHub Release. If SmartScreen is cautious with a new unsigned build, that is Windows being Windows—open the release page and grab the file from there.</p>
+        <div class="cta-row">
+          <a class="btn btn-lg" href="DOWNLOAD_URL">Download latest installer</a>
+          <a class="btn btn-ghost btn-lg" href="RELEASES_URL">View release notes</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="row">
+        <div>
+          <strong style="color:var(--ink)">Onfile</strong><br>
+          Free Windows filename search for the drives and shares you add.
+        </div>
+        <div>
+          <a href="RELEASES_URL">Releases</a>
+          ·
+          <a href="REPO_URL">Source</a>
+          ·
+          <a href="ISSUES_URL">Feedback</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
 
