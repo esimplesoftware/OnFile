@@ -22,11 +22,11 @@ Windows 10/11 64-bit. SmartScreen may warn until the app has an Authenticode cer
 
 Email: esimplesoftware@gmail.com  
 
-Include the first lines of `findex.log` (version) and a short description. Do not send `findex.db`.
+Include the first lines of `onfile.log` (version) and a short description. Do not send `onfile.db`.
 
 Logs (typical):
 
-- `%APPDATA%\Findex\findex.log`
-- `%LOCALAPPDATA%\Findex\usn-helper.log`
+- `%APPDATA%\onfile\onfile.log`
+- `%LOCALAPPDATA%\onfile\usn-helper.log`
 
 See [EULA.txt](EULA.txt) and [CHANGELOG.md](CHANGELOG.md).
