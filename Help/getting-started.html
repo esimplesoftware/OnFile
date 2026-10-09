@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting started — Onfile Help</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; font-size: 15px; line-height: 1.45;
+           max-width: 44rem; margin: 1.5rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.15rem; font-weight: 600; margin: 1.6rem 0 0.5rem; }
+    p, li { color: #222; }
+    .lead { color: #444; margin-top: 0; }
+    a { color: #0b57d0; }
+    ol, ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    nav { font-size: 0.9rem; margin-bottom: 1.2rem; }
+    footer { margin-top: 2.5rem; font-size: 0.85rem; color: #666; }
+  </style>
+</head>
+<body>
+  <nav><a href="index.html">Onfile Help</a> · Getting started</nav>
+  <h1>Getting started</h1>
+  <p class="lead">Add a drive, wait for the index, then type in the search box.</p>
+
+  <h2>First run</h2>
+  <ol>
+    <li>Start <strong>onfile-ui.exe</strong>.</li>
+    <li>Add a volume: a fixed local drive or a network share (<code>\\server\share</code>).</li>
+    <li>Let Onfile scan (or choose Scan now). Wait until the volume shows <strong>Synced</strong>.</li>
+    <li>Type at least two characters in the search box. Three or more characters search the saved disk index.</li>
+  </ol>
+  <p>The window opens before loading finishes. The first search after startup can take a few seconds. Later searches are faster. A search-index rebuild runs in the background.</p>
+
+  <h2>The window</h2>
+  <ul>
+    <li><strong>Search box</strong> — name search over enabled volumes.</li>
+    <li><strong>Results</strong> — matching files and folders. Selecting a row shows modified time, size, and created time when the file is still on disk.</li>
+    <li><strong>Volume list</strong> — each drive or share, its state, and a status icon. See <a href="volumes.html">Volumes</a>.</li>
+    <li><strong>Status bar</strong> — volume status, live update, search result count and time, and search-index progress (<code>done / total</code>).</li>
+  </ul>
+  <p>Closing the window <strong>hides</strong> Onfile in the notification area. To quit, use <strong>Exit</strong> on the tray menu or in the app menu.</p>
+
+  <h2>Tray and hotkey</h2>
+  <ul>
+    <li>Left-click the tray icon to show the window.</li>
+    <li>Right-click for Show or Exit.</li>
+    <li>The hotkey is <strong>Ctrl+Shift+F</strong>.</li>
+  </ul>
+  <p>If the hotkey does nothing, see <a href="troubleshooting.html">Troubleshooting</a>.</p>
+
+  <h2>Where files are stored</h2>
+  <p>Onfile keeps its own settings, index, and log. You do not need to edit those files.</p>
+  <ul>
+    <li><code>%APPDATA%\Onfile\onfile.ini</code> — settings Onfile writes</li>
+    <li><code>%APPDATA%\Onfile\onfile.db</code> — index, encrypted for this Windows user</li>
+    <li><code>%APPDATA%\Onfile\onfile.db.key</code> — sealed key. Leave this next to the index.</li>
+    <li><code>%APPDATA%\Onfile\onfile.log</code> — log</li>
+  </ul>
+  <p>If a settings file is already next to the program, Onfile uses that folder instead.</p>
+  <p>The index cannot be opened on another PC or by another Windows user. See <a href="privacy.html">Index encryption</a>.</p>
+
+  <p>Next: <a href="volumes.html">Volumes</a> · <a href="search.html">Search</a></p>
+  <footer>Onfile 2.1.0</footer>
+</body>
+</html>

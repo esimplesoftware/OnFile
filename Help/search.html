@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search — Onfile Help</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; font-size: 15px; line-height: 1.45;
+           max-width: 44rem; margin: 1.5rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.15rem; font-weight: 600; margin: 1.6rem 0 0.5rem; }
+    p, li, td { color: #222; }
+    .lead { color: #444; margin-top: 0; }
+    a { color: #0b57d0; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    table { border-collapse: collapse; width: 100%; margin: 0.6rem 0 1rem; }
+    th, td { text-align: left; padding: 0.35rem 0.5rem 0.35rem 0; border-bottom: 1px solid #ddd;
+             vertical-align: top; }
+    th { font-weight: 600; }
+    code { font-size: 0.92em; }
+    nav { font-size: 0.9rem; margin-bottom: 1.2rem; }
+    footer { margin-top: 2.5rem; font-size: 0.85rem; color: #666; }
+  </style>
+</head>
+<body>
+  <nav><a href="index.html">Onfile Help</a> · Search</nav>
+  <h1>Search</h1>
+  <p class="lead">Onfile matches <strong>names and paths</strong>, not file contents. Only enabled (not paused) volumes are searched.</p>
+
+  <h2>How to search</h2>
+  <ul>
+    <li>Type in the box at the top. Search runs after a short pause.</li>
+    <li>Search starts at 2 characters.</li>
+    <li>If the query has a run of <strong>3 or more</strong> plain characters (for example <code>list</code> in <code>list*.txt</code>), Onfile uses the saved search index and results are almost instant.</li>
+    <li>If it does not (for example <code>li</code>, <code>*.c</code>, <code>l?st</code>), Onfile checks every saved name instead. These searches still work but can take several seconds on large volumes.</li>
+    <li>The search index is built once after a fresh scan and kept up to date afterwards. While it is building (status bar shows <code>done / total</code>), searches may be slower or incomplete.</li>
+    <li>The first search after startup can take a few seconds. Later searches are faster.</li>
+    <li>Results are ranked: exact name first, then prefix, then substring, then path.</li>
+    <li>The list shows up to <strong>200</strong> matches. Narrow the query if you do not see the file.</li>
+  </ul>
+
+  <h2>Examples</h2>
+  <table>
+    <thead>
+      <tr><th>You type</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>invoice</code></td><td>Name contains “invoice”</td></tr>
+      <tr><td><code>invoice d:</code></td><td>Same, only volumes whose path starts with <code>d:</code></td></tr>
+      <tr><td><code>"readme.txt"</code></td><td>Exact file name</td></tr>
+      <tr><td><code>proj*</code></td><td>Name starts with <code>proj</code></td></tr>
+      <tr><td><code>*report</code></td><td>Name ends with <code>report</code></td></tr>
+      <tr><td><code>notes.*</code></td><td>Name is <code>notes</code> or starts with <code>notes.</code></td></tr>
+      <tr><td><code>list*.txt</code></td><td>Starts with <code>list</code> and ends with <code>.txt</code></td></tr>
+      <tr><td><code>*.c</code></td><td>Ends with <code>.c</code> (short pattern; slower)</td></tr>
+      <tr><td><code>l?st</code></td><td><code>?</code> is exactly one character: <code>list</code>, <code>lost</code>, … (slower)</td></tr>
+    </tbody>
+  </table>
+  <h2>Wildcards</h2>
+  <ul>
+    <li><code>*</code> matches any run of characters (including none). <code>?</code> matches exactly one character. Both work anywhere in the pattern.</li>
+    <li>A pattern with wildcards must match the <strong>whole</strong> file name. <code>list*.t</code> does not find <code>list.txt</code>; use <code>list*.t*</code>.</li>
+    <li>Matching ignores case. Folder names in the path are not matched, only the file’s own name.</li>
+    <li>Inside quotes, <code>*</code> and <code>?</code> are ordinary characters.</li>
+  </ul>
+  <p>A trailing <code>d:</code> or <code>\\server</code> limits which volume is searched. There is no AND/OR and no regular expressions.</p>
+
+  <h2>Searching inside a folder</h2>
+  <p>Put a folder path after the name: <code>list c:\</code>, <code>list c:\program files\</code>, <code>*.txt d:\projects\</code>. Only files under that folder are returned. Folder names with spaces are fine.</p>
+  <ul>
+    <li>When there are more matches than fit in the list (200), a <strong>folder list</strong> opens next to the results. It shows the subfolders one level down and how many matches each one holds (<strong>Folder</strong> / <strong>File Count</strong>), largest first.</li>
+    <li><strong>Click</strong> a folder to add it to the search box and drill down. Repeat until the results fit.</li>
+    <li><code>(here)</code> counts matches directly in the current folder, not in a subfolder.</li>
+    <li>End the path with <code>\</code> to mean “this folder”. Without it, the last part is treated as the start of a folder name: <code>list c:\prog</code> matches <code>Program Files</code>, <code>ProgramData</code>, … Backspacing to edit the path works the same way.</li>
+    <li>The folder list hides when all matches fit or there are no subfolders to drill into.</li>
+  </ul>
+
+  <h2>Results</h2>
+  <p>The list shows name and path. Selecting a row shows modified time, size, and created time when the file is still on disk.</p>
+  <ul>
+    <li><strong>Enter</strong> — open the file or folder.</li>
+    <li><strong>Ctrl+Enter</strong> — open the containing folder.</li>
+    open your default terminal there (choose it under Tools → Default terminal).
+    <li><strong>Ctrl+C</strong> — copy the path. <strong>Ctrl+Shift+C</strong> — copy the name.</li>
+  </ul>
+  <p>The result count and time are on the status bar. If a second drive seems missing from results, narrow the query (add <code>e:</code>) or see <a href="troubleshooting.html">Troubleshooting</a>.</p>
+
+  <p><a href="volumes.html">Volumes</a></p>
+  <footer>Onfile 2.1.0</footer>
+</body>
+</html>
