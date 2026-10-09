@@ -1,16 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Onfile — Find files across the drives and shares you add</title>
-  <meta name="description" content="Onfile is a free Windows app that indexes filenames and paths on the local disks and network shares you choose. Open the file, open the folder, copy the path, or open a command line in that folder.">
+  <meta name="description" content="Onfile is a free Windows app that indexes filenames and paths on the local drives and network shares you choose. Open the file, open the folder, copy the path, or open your terminal in that folder.">
   <meta name="theme-color" content="#1a1814">
   <meta property="og:title" content="Onfile">
-  <meta property="og:description" content="Find a file by name across the drives and shares you add. Then open it, copy the path, or open a command line there.">
+  <meta property="og:description" content="Find a file by name across the drives and shares you add. Then open it, copy the path, or open your terminal there.">
   <meta property="og:type" content="website">
-  <link rel="icon" href="onfile-256.png" type="image/png">
-  <link rel="apple-touch-icon" href="onfile-256.png">
+  <link rel="icon" href="icon-256.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-256.png">
   <style>
     :root {
       --bg: #f4efe6;
@@ -179,9 +180,6 @@
       margin-bottom: 8px;
     }
 
-    .actions li {
-      list-style: none;
-    }
     ul.actions {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -190,6 +188,7 @@
       margin: 0;
     }
     ul.actions li {
+      list-style: none;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -225,6 +224,15 @@
     summary { cursor: pointer; font-weight: 650; }
     details p { margin: 10px 0 4px; color: var(--muted); }
 
+    kbd {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+
     footer {
       border-top: 1px solid var(--line);
       padding: 28px 0 48px;
@@ -251,7 +259,7 @@
     <header>
       <a class="brand" href="#top">
         <span class="mark" aria-hidden="true">
-          <img src="onfile-256.png" alt="" width="40" height="40">
+          <img src="icon-256.png" alt="" width="40" height="40">
         </span>
         Onfile
       </a>
@@ -265,17 +273,17 @@
 
     <main id="top">
       <section class="hero">
-        <p class="kicker">Free Windows app</p>
+        <p class="kicker">Free Windows app · Version 2.1.0</p>
         <h1>Find filenames across your drives and shares. Then open the file, the folder, or a terminal in that folder.</h1>
         <p class="lede">
-          Onfile indexes names and paths on the local disks and network shares you choose.
-          Open the file, open the folder, copy the path or name, or open a command line in that folder—without waiting on Explorer.
+          Onfile indexes names and paths on the local drives and network shares you choose.
+          Open the file, open the folder, copy the path or name, or open your terminal in that folder—without waiting on Explorer.
         </p>
         <div class="cta-row">
           <a class="btn btn-lg" href="https://github.com/esimplesoftware/onfile/releases/latest">Download Onfile for Windows</a>
-          <a class="btn btn-ghost btn-lg" href="https://github.com/esimplesoftware/onfile/releases/latest">GitHub Releases</a>
+          <a class="btn btn-ghost btn-lg" href="https://github.com/esimplesoftware/onfile/releases/latest">Release notes</a>
         </div>
-        <p class="fine">Free. Name and path search only. You add each drive or share.</p>
+        <p class="fine">Free. Name and path search only. You add each drive or share. Activate once with your free <code>ONFILE-</code> license key.</p>
 
         <figure class="shot">
           <img
@@ -293,17 +301,17 @@
           <article class="card">
             <span class="num">01</span>
             <h3>You pick the locations</h3>
-            <p>Add NTFS volumes and network shares. Nothing else is in the index.</p>
+            <p>Add local drives (NTFS, FAT32, exFAT and others) and network shares. Nothing else is in the index.</p>
           </article>
           <article class="card">
             <span class="num">02</span>
-            <h3>Local stays fresh. Shares wait for you.</h3>
-            <p>Local NTFS can follow the change journal. A share is scanned when you ask—not while you are trying to use the PC.</p>
+            <h3>Local NTFS stays fresh. Shares follow your schedule.</h3>
+            <p>Local NTFS follows the change journal. Shares and other drives are scanned when you ask, or on a schedule you set per volume.</p>
           </article>
           <article class="card">
             <span class="num">03</span>
             <h3>The result is the action</h3>
-            <p>Find the file, then open it, open the folder, copy the path or name, or open a command line in that folder.</p>
+            <p>Find the file, then open it, open the folder, copy the path or name, or open your default terminal in that folder.</p>
           </article>
         </div>
       </section>
@@ -316,21 +324,41 @@
           <li>Open folder<small>skip the tree walk</small></li>
           <li>Copy path<small>for tickets and scripts</small></li>
           <li>Copy name<small>just the filename</small></li>
-          <li>Command line<small>in that folder</small></li>
+          <li>Terminal<small>your default, in that folder</small></li>
         </ul>
+      </section>
+
+      <section>
+        <h2>Always close by</h2>
+        <div class="grid3">
+          <article class="card">
+            <h3>Hotkey</h3>
+            <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> brings Onfile up with the cursor in search.</p>
+          </article>
+          <article class="card">
+            <h3>Tray</h3>
+            <p>Onfile stays in the tray so live updates and scheduled scans keep running.</p>
+          </article>
+          <article class="card">
+            <h3>Your terminal</h3>
+            <p>Pick the default under Tools → Default terminal. <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> opens it at the selected result.</p>
+          </article>
+        </div>
       </section>
 
       <section id="limits">
         <h2>What it does and does not do</h2>
-        <p class="section-lead">1.0 is name and path search on locations you add. That is the whole product.</p>
+        <p class="section-lead">Name and path search on locations you add. That is the whole product.</p>
         <div class="split">
           <article class="card yes">
             <h3>Does</h3>
             <ul>
               <li>Index filenames and paths on drives and shares you add</li>
               <li>Keep local NTFS current from the change journal</li>
-              <li>Scan network shares when you ask</li>
-              <li>Open file, folder, copy path or name, open a command line in that folder</li>
+              <li>Scan shares and other drives when you ask, or on a schedule</li>
+              <li>Search inside one folder of the index</li>
+              <li>Open file, folder, copy path or name, open a terminal in that folder</li>
+              <li>Encrypt the index database on disk</li>
             </ul>
           </article>
           <article class="card no">
@@ -338,7 +366,7 @@
             <ul>
               <li>Search inside file contents</li>
               <li>Pretend a NAS scan is as instant as local NTFS</li>
-              <li>Index locations you never added</li>
+              <li>Index locations you never added, or removable disks</li>
               <li>Upload your file list (search stays on your PC)</li>
             </ul>
           </article>
@@ -351,29 +379,33 @@
 
         <details open>
           <summary>Is this Everything?</summary>
-          <p>Everything is excellent for local NTFS names. Onfile is built around locations you add, including shares you scan on demand, and actions on the result.</p>
+          <p>Everything is excellent for local NTFS names. Onfile is built around locations you add, including shares you scan on demand or on a schedule, and actions on the result.</p>
         </details>
         <details>
           <summary>Will my NAS be instant?</summary>
-          <p>After a scan, you search the index. The scan itself depends on the share. You start that scan; Onfile does not pretend a network folder is a local MFT.</p>
+          <p>After a scan, you search the index instantly. The scan itself depends on the share. You start it, or set a schedule; Onfile must be running for a scheduled scan to start.</p>
         </details>
         <details>
           <summary>Does it search inside PDFs or documents?</summary>
           <p>No. Names and paths only.</p>
         </details>
         <details>
-          <summary>What does a command line mean here?</summary>
-          <p>Onfile opens a command line in the folder that contains the file. Which terminal host you get may change in a later version; 1.0 is “a command line in that folder.”</p>
+          <summary>Which terminal does it open?</summary>
+          <p>The one you choose under Tools → Default terminal. It opens in the folder that contains the selected file.</p>
         </details>
         <details>
           <summary>Is it free?</summary>
-          <p>Yes. Onfile is a free Windows app.</p>
+          <p>Yes. Onfile is free. It needs a license key starting with <code>ONFILE-</code>. Activate it under Help → License. One key works on two PCs, and Onfile keeps working offline for 30 days between checks.</p>
+        </details>
+        <details>
+          <summary>Does it send my files anywhere?</summary>
+          <p>No. The index stays on your PC, encrypted. Only the license check talks to the license server.</p>
         </details>
       </section>
 
       <section>
         <h2>Get it</h2>
-        <p class="section-lead">Download the installer from the latest GitHub Release. If SmartScreen is cautious with a new unsigned build, that is Windows being Windows—open the release page and grab the file from there.</p>
+        <p class="section-lead">Download the installer from the latest GitHub Release. If SmartScreen is cautious with a new build, open the release page and grab the file from there.</p>
         <div class="cta-row">
           <a class="btn btn-lg" href="https://github.com/esimplesoftware/onfile/releases/latest">Download latest installer</a>
           <a class="btn btn-ghost btn-lg" href="https://github.com/esimplesoftware/onfile/releases/latest">View release notes</a>
@@ -390,7 +422,7 @@
         <div>
           <a href="https://github.com/esimplesoftware/onfile/releases/latest">Releases</a>
           ·
-          <a href="https://github.com/esimplesoftware/onfile/releases/latest">Source</a>
+          <a href="https://github.com/esimplesoftware/onfile">Source</a>
           ·
           <a href="https://github.com/esimplesoftware/onfile/issues">Feedback</a>
         </div>
@@ -399,4 +431,3 @@
   </div>
 </body>
 </html>
-
