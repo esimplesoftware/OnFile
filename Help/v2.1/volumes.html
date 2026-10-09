@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Volumes — Onfile Help</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; font-size: 15px; line-height: 1.45;
+           max-width: 44rem; margin: 1.5rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.15rem; font-weight: 600; margin: 1.6rem 0 0.5rem; }
+    p, li { color: #222; }
+    .lead { color: #444; margin-top: 0; }
+    a { color: #0b57d0; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    nav { font-size: 0.9rem; margin-bottom: 1.2rem; }
+    footer { margin-top: 2.5rem; font-size: 0.85rem; color: #666; }
+    h3 { font-size: 1rem; font-weight: 600; margin: 1.2rem 0 0.4rem; }
+    code, pre { font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.92em; }
+    pre { background: #f4f4f4; border: 1px solid #ddd; padding: 0.6rem 0.8rem; }
+    table { border-collapse: collapse; margin: 0.5rem 0; }
+    th, td { border: 1px solid #ddd; padding: 0.3rem 0.6rem; text-align: left; }
+  </style>
+</head>
+<body>
+  <nav><a href="index.html">Onfile Help</a> · Volumes</nav>
+  <h1>Volumes</h1>
+  <p class="lead">A volume is one indexed root: a fixed local drive or a network share.</p>
+
+  <h2>Add local</h2>
+  <p>Pick a <strong>fixed</strong> drive that is not already in the list. NTFS can live-update. Any other named file system is <strong>Scan only</strong>: folder walk, no change journal. A drive with no file system name cannot be added. Removable/USB drives are not listed.</p>
+
+  <h2>Add remote</h2>
+  <p>Enter a UNC path such as <code>\\server\share</code>, click <strong>Probe</strong>, then OK if the share is reachable. Network volumes do not get live update. Scan them again when that tree changes, or set a schedule.</p>
+
+  <h2>Volume menu</h2>
+  <p>Right-click a volume, or use the Volumes menu:</p>
+  <ul>
+    <li><strong>Scan now</strong> — rebuild the index for that volume from disk.</li>
+    <li><strong>Schedule</strong> — remote shares and scan-only volumes. See below.</li>
+    <li><strong>Cancel scan</strong> — stop the scan that is running on this volume.</li>
+    <li><strong>Pause</strong> — leave the index on disk but do not search it and do not live-update.</li>
+    <li><strong>Resume</strong> — search again. An NTFS volume can live-update again.</li>
+    <li><strong>Index filters</strong> — include and exclude folders.</li>
+    <li><strong>Move up / Move down</strong> — change the list order.</li>
+    <li><strong>Remove</strong> — delete that volume’s index rows.</li>
+  </ul>
+  <p><strong>Rebuild index</strong> (Tools) scans volumes again. Use it after changing filters or if results look wrong.</p>
+
+  <h2>Icons</h2>
+  <p>The first column is a status icon. Hover it for a short explanation.</p>
+  <p>Local drives:</p>
+  <ul>
+    <li><strong>Indexed</strong> — ready to search.</li>
+    <li><strong>Paused</strong> — you turned it off.</li>
+    <li><strong>Needs attention</strong> — not scanned yet, stale, missing, or the last scan failed. The tip shows the reason.</li>
+  </ul>
+  <p>Clicking a local icon does nothing. Remote shares use a clock instead:</p>
+  <ul>
+    <li><strong>Off</strong> — no schedule.</li>
+    <li><strong>On</strong> — a scan is scheduled.</li>
+    <li><strong>Warning</strong> — the last scheduled attempt could not run. Open Schedule and read Messages.</li>
+  </ul>
+  <p>Click a scan-only or remote clock to open Schedule.</p>
+
+  <h2>Schedule a remote scan</h2>
+  <p>Choose <strong>Schedule</strong> on a network share. Onfile must be running for a scheduled scan to start.</p>
+  <ul>
+    <li><strong>Off</strong> — no automatic scan.</li>
+    <li><strong>Daily</strong> — every day at the chosen time. Weekday and Every N days are not used.</li>
+    <li><strong>Weekly</strong> — the chosen weekday at the chosen time. Every N days is not used.</li>
+    <li><strong>Every N days</strong> — every N days at the chosen time, counted from the day you save. Weekday is not used. If that time today has already passed, the first run is N days out.</li>
+  </ul>
+  <p>Fields that do not apply to the cadence are disabled. <strong>Next run</strong> shows the time Onfile will use.</p>
+  <p><strong>Run one catch-up if the PC was off</strong> is off unless you check it. If Onfile was not running when a scan was due, and catch-up is off, that run is skipped and the next one is scheduled. Catch-up runs at most one missed scan, not every missed day.</p>
+  <p>A schedule does not run while the volume is paused. It is saved and starts again after Resume.</p>
+  <p><strong>Scan now</strong> in the dialog saves the schedule and starts a scan immediately.</p>
+  <p><strong>Messages</strong> keeps the newest 12 notes, such as a finished scan, a missed run, or a share that could not be reached.</p>
+
+  <h2>States</h2>
+  <ul>
+    <li><strong>Added</strong> — in the list; scan to build the index.</li>
+    <li><strong>Indexing / Loading</strong> — scan or startup load in progress.</li>
+    <li><strong>Synced</strong> — index ready. NTFS can live-update. Scan-only volumes stay at the last scan.</li>
+    <li><strong>Catching up</strong> — applying recent disk changes.</li>
+    <li><strong>Stale</strong> — run Scan now.</li>
+    <li><strong>Error</strong> — drive or share missing, or the last scan failed.</li>
+    <li><strong>Paused</strong> — you turned it off.</li>
+  </ul>
+
+  <h2 id="filters">Filters</h2>
+  <p>Each volume has an <strong>Include</strong> list and an <strong>Exclude</strong> list (<strong>Index filters</strong> on the volume). Put one rule per line. Case does not matter, and <code>/</code> works the same as <code>\</code>.</p>
+
+  <h3>How a path is checked</h3>
+  <ol>
+    <li>If Include is empty, the whole volume is included. If it has rules, a path must match at least one.</li>
+    <li>If the path matches any Exclude rule, it is skipped. Exclude wins over Include.</li>
+    <li>A rule matches the folder itself and everything inside it.</li>
+  </ol>
+
+  <h3>Two kinds of rules</h3>
+  <ul>
+    <li><strong>Name rule</strong> (no backslash), such as <code>node_modules</code>. Matches any folder <em>or file</em> with exactly that name, at any depth. It is a whole-name match: <code>temp</code> does not match <code>temp2</code> or <code>mytemp</code>.</li>
+    <li><strong>Path rule</strong> (contains a backslash), such as <code>\Windows</code> or <code>\Users\Pat\AppData</code>. Matches only that location, measured from the volume root. On <code>C:</code>, <code>\Windows</code> means <code>C:\Windows</code>, not <code>C:\Backup\Windows</code>.</li>
+  </ul>
+  <p>A trailing backslash is not needed: <code>\Windows</code> and <code>\Windows\</code> are the same rule. The leading backslash is what matters for a single folder name. <code>\Temp</code> matches only <code>C:\Temp</code>. <code>Temp</code> matches every folder named Temp.</p>
+  <p>Full paths such as <code>C:\Windows</code> or <code>\\server\share\Archive</code> also work. An Exclude rule that covers the whole volume is ignored. To stop indexing a volume, pause it instead.</p>
+
+  <h3>Examples</h3>
+  <table>
+    <tr><th>Rule</th><th>Matches on volume C:</th></tr>
+    <tr><td><code>\Windows</code></td><td><code>C:\Windows</code> and everything under it</td></tr>
+    <tr><td><code>\Users\Pat\AppData</code></td><td>Only Pat's AppData folder</td></tr>
+    <tr><td><code>AppData</code></td><td>Every AppData folder, for every user</td></tr>
+    <tr><td><code>node_modules</code></td><td>Every node_modules folder on the drive</td></tr>
+    <tr><td><code>desktop.ini</code></td><td>Every file named desktop.ini</td></tr>
+  </table>
+  <p>There are no wildcards. <code>*.tmp</code> and <code>Temp*</code> do not work.</p>
+
+  <h3>Suggested Exclude list for the Windows drive</h3>
+  <p>These hold system files, caches, and temporary files you rarely search for. Copy the lines you want into the Exclude list of your <code>C:</code> volume:</p>
+  <pre>\Windows
+\Windows.old
+\$Recycle.Bin
+\System Volume Information
+\$WinREAgent
+\Recovery
+\ProgramData\Microsoft\Windows Defender
+\ProgramData\Package Cache
+INetCache
+D3DSCache
+Temp</pre>
+  <p>Optional, for developers (skip if you search inside code projects):</p>
+  <pre>node_modules
+.git
+.vs
+__pycache__</pre>
+  <ul>
+    <li><code>Temp</code> skips every folder named Temp, including <code>AppData\Local\Temp</code> for each user. Remove it if you keep your own files in a folder named Temp.</li>
+    <li>Use <code>AppData</code> to skip all per-user application data. It is large and mostly settings and caches, but some apps keep files there.</li>
+    <li>Leave <code>\Program Files</code> in the index if you want to find installed programs.</li>
+  </ul>
+
+  <h3>When changes take effect</h3>
+  <p>Filters apply on the <strong>next Scan now</strong> or <strong>Rebuild index</strong>. Until then, files already in the index stay searchable. Live update applies new rules only to files created or renamed after the change.</p>
+
+  <p>See also <a href="live-update.html">Live update</a> · <a href="troubleshooting.html">Troubleshooting</a></p>
+  <footer>Onfile 2.1.0</footer>
+</body>
+</html>

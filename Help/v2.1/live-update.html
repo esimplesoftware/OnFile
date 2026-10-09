@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live update — Onfile Help</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; font-size: 15px; line-height: 1.45;
+           max-width: 44rem; margin: 1.5rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.15rem; font-weight: 600; margin: 1.6rem 0 0.5rem; }
+    p, li { color: #222; }
+    .lead { color: #444; margin-top: 0; }
+    a { color: #0b57d0; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    nav { font-size: 0.9rem; margin-bottom: 1.2rem; }
+    footer { margin-top: 2.5rem; font-size: 0.85rem; color: #666; }
+  </style>
+</head>
+<body>
+  <nav><a href="index.html">Onfile Help</a> · Live update</nav>
+  <h1>Live update</h1>
+  <p class="lead">On local NTFS drives, Onfile can follow Windows’ change journal so new, renamed, and deleted files appear without a full rescan.</p>
+
+  <h2>Status line</h2>
+  <ul>
+    <li><strong>Live update on</strong> — the helper service is running and Onfile can talk to it.</li>
+    <li><strong>Live update off</strong> — helper not installed or not running. Search still uses the last index. Use <strong>Scan now</strong> when files change.</li>
+  </ul>
+  <p>Network shares never use live update. Scan those when the tree changes, or use <a href="volumes.html">Schedule</a>.</p>
+
+  <h2>The helper</h2>
+  <p>A small service named <strong>Onfile USN Helper</strong> reads the journal so Onfile itself does not need to stay elevated.</p>
+  <ul>
+    <li><code>onfile-usn.exe</code> must sit next to <code>onfile-ui.exe</code>.</li>
+    <li>After the index loads, Onfile may ask Windows for permission to install the helper. Choose Yes.</li>
+    <li>The installed copy lives in <code>%LOCALAPPDATA%\Onfile</code>.</li>
+  </ul>
+  <p>You can refuse the prompt. Search and manual scan still work.</p>
+
+  <h2>When to scan anyway</h2>
+  <ul>
+    <li>Volume state is <strong>Stale</strong> or <strong>Error</strong>.</li>
+    <li>You changed include/exclude filters (old files are not stripped until a scan).</li>
+    <li>Live update is off and you know the disk changed.</li>
+  </ul>
+
+  <p>Install failed, service stuck, or you want it gone: <a href="troubleshooting.html">Troubleshooting</a>.</p>
+  <footer>Onfile 2.1.0</footer>
+</body>
+</html>
