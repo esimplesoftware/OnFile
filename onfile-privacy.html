@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onfile Privacy Statement</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; font-size: 15px; line-height: 1.45;
+           max-width: 50rem; margin: 1.5rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.15rem; font-weight: 600; margin: 1.6rem 0 0.5rem; }
+    p, li, td, th { color: #222; }
+    .lead { color: #444; margin-top: 0; }
+    a { color: #0b57d0; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    code { font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.92em; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0 1rem; }
+    th, td { border: 1px solid #ddd; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+    th { background: #f4f6f8; font-weight: 600; }
+    address { font-style: normal; }
+  </style>
+</head>
+<body>
+  <h1>Onfile Privacy Statement</h1>
+  <p class="lead">Last updated: October 9, 2026</p>
+
+  <p>This statement explains what information the Onfile desktop software (the &ldquo;Software&rdquo;) and Carlton Ray, doing business as eSimpleSoftware (&ldquo;we&rdquo;, &ldquo;us&rdquo;), collect, and what stays on your computer.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Onfile indexes file names on your computer. The index stays on your computer and is encrypted.</li>
+    <li>Onfile never sends file names, folder paths, search text, or your computer name to us or anyone else.</li>
+    <li>The only network traffic is license activation and checks, handled by our payment and licensing provider, Polar.</li>
+  </ul>
+
+  <h2>Information that stays on your computer</h2>
+  <table>
+    <tr><th>Item</th><th>Where</th><th>Protection</th></tr>
+    <tr><td>File index (<code>onfile.db</code>)</td><td><code>%APPDATA%\Onfile</code> or a folder you choose</td><td>Encrypted with a random key sealed to your Windows account</td></tr>
+    <tr><td>License record (<code>license.dat</code>)</td><td>Same folder</td><td>Sealed to your Windows account</td></tr>
+    <tr><td>Settings (<code>onfile.ini</code>)</td><td>Same folder</td><td>Plain text. Lists the drives and shares you added, filters, and schedules. No searches</td></tr>
+    <tr><td>Log (<code>onfile.log</code>)</td><td>Same folder</td><td>Plain text. Drives, record counts, and errors. No file names or searches</td></tr>
+    <tr><td>Verbose log (<code>onfile.log.verbose</code>)</td><td>Same folder</td><td>Only when started with <code>--verbose</code>. File names and searches are hidden unless you also add <code>--verbose-names</code>. Deleted on the next normal start</td></tr>
+    <tr><td>Helper log (<code>usn-helper.log</code>)</td><td><code>%LOCALAPPDATA%\Onfile</code></td><td>Plain text. Drive letters, service status, and errors. No file names</td></tr>
+  </table>
+  <p>We cannot see any of this. It is only shared if you choose to send it to us, for example a log file with a support request.</p>
+  <p>Onfile does not keep search history, does not export results, and does not send crash reports.</p>
+
+  <h2>Information sent over the internet</h2>
+  <p>Onfile contacts Polar&rsquo;s license service (<code>api.polar.sh</code>) only in these cases:</p>
+  <table>
+    <tr><th>When</th><th>What is sent</th></tr>
+    <tr><td>Activation</td><td>License key, a random device ID (for example <code>Onfile PC 7F3A</code>)</td></tr>
+    <tr><td>Each start (license check)</td><td>License key, activation ID</td></tr>
+    <tr><td>Deactivation</td><td>License key, activation ID</td></tr>
+  </table>
+  <p>As with any internet connection, Polar receives your IP address. The random device ID is shown in Onfile&rsquo;s License dialog so you can tell your PCs apart when managing activations. It is not derived from your computer name or hardware.</p>
+
+  <h2>Purchases</h2>
+  <p>Polar Software, Inc. is the merchant of record for Onfile. When you buy a license, Polar collects your name, email address, billing details, and payment information, and processes them under its own privacy policy:</p>
+  <p><a href="https://polar.sh/legal/privacy-policy">https://polar.sh/legal/privacy-policy</a></p>
+  <p>We receive your name, email address, and order details from Polar so we can provide your license and support. We do not receive your full card number.</p>
+
+  <h2>How we use information</h2>
+  <p>We use purchase and license information only to:</p>
+  <ul>
+    <li>issue, activate, and verify licenses,</li>
+    <li>respond to support requests,</li>
+    <li>meet legal and tax obligations.</li>
+  </ul>
+  <p>We do not sell personal information and do not use it for advertising.</p>
+
+  <h2>Clipboard</h2>
+  <p><strong>Copy path</strong> and <strong>Copy name</strong> put text on the Windows clipboard. If Windows clipboard history or cloud clipboard is turned on, Windows may keep that text. This is controlled by Windows, not Onfile.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li>Uninstall Onfile and delete <code>%APPDATA%\Onfile</code> and <code>%LOCALAPPDATA%\Onfile</code> to remove all local data.</li>
+    <li>Deactivate a license from the License dialog or the Polar customer portal.</li>
+    <li>To ask about, correct, or delete the purchase information we hold, contact us below. For information held by Polar, see Polar&rsquo;s privacy policy.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>Onfile is not directed to children under 13, and we do not knowingly collect their information.</p>
+
+  <h2>Changes</h2>
+  <p>We will update this statement if Onfile&rsquo;s data handling changes, and change the date above.</p>
+
+  <h2>Contact</h2>
+  <address>
+    Carlton Ray, eSimpleSoftware<br>
+    Jackson, Tennessee 38305<br>
+    Email: <a href="mailto:esimplesoftware@gmail.com">esimplesoftware@gmail.com</a>
+  </address>
+</body>
+</html>
