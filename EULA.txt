@@ -1,5 +1,5 @@
 ONFILE END USER LICENSE AGREEMENT
-Last updated: September 19, 2026
+Last updated: October 9, 2026
 This End User License Agreement (“Agreement”) is between you and Carlton Ray, doing business as eSimpleSoftware (“Licensor”), and governs your use of the Onfile desktop software, including the optional Windows helper service, documentation, and updates (together, the “Software”).
 By installing, copying, or using the Software, you agree to this Agreement. If you do not agree, do not install or use the Software.
 1. License
@@ -16,7 +16,7 @@ You may not: (a) sell, rent, sublicense, or publicly distribute the Software exc
 The Software may install or use a Windows service that runs with elevated privileges so it can read volume change information (including NTFS USN journal data) on volumes you configure. You are responsible for deciding which volumes and paths are indexed and for using an account that is allowed to install or control that service.
 5. Your data
 
-The Software is intended to index file names and metadata on volumes and shares you add. Indexes and logs are stored on your machine (or a path you choose). Licensor does not require an online account to use the core Software. You are responsible for backups of your index, configuration, and logs.
+The Software is intended to index file names and metadata on volumes and shares you add. Indexes and logs are stored on your machine (or a path you choose) and are not sent to Licensor. A license key is required. Activation, a validation check at each start, and deactivation contact Licensor's license provider over the internet and send the license key and activation ID; the provider receives your IP address. No file names, paths, search text, or computer name are sent. You are responsible for backups of your index, configuration, and logs.
 6. Third-party components
 
 The Software may include third-party libraries licensed under their own terms. Those terms govern those components. A list may be provided in an “Acknowledgments,” “Third-party licenses,” or similar file with the Software.
